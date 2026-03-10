@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us — everysecond</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@800&family=DM+Sans:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Shared styles now in style.css */
+    </style>
+</head>
+
+<body>
+    <nav class="navbar" style="position: fixed; width: 100%;">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <img src="logo.png" alt="EverySecond Logo" class="logo-img">
+                <span class="logo-text">everysecond</span>
+            </a>
+            <button class="theme-toggle" id="theme-toggle" aria-label="Toggle Dark Mode" style="margin-left: auto;">
+                <span class="icon-moon">🌙</span>
+                <span class="icon-sun">☀️</span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="legal-content">
+        <a href="index.html" class="back-home">← Back to World Stats</a>
+        <div class="legal-header">
+            <h1>About Us</h1>
+            <p>The mission behind everysecond.live</p>
+        </div>
+        <div class="legal-body">
+            <p>At <strong>everysecond</strong>, we believe that data has the power to change perspective. Our platform
+                provides a real-time window into the massive, unfolding scale of human activity and natural phenomena on
+                our planet.</p>
+
+            <h2>Our Vision</h2>
+            <p>In a world of static headlines, we aim to provide a "live" sense of urgency and awareness. Whether it's
+                the rate of reforestation or the volume of digital messages sent, seeing the numbers tick up in
+                real-time makes the abstract feel immediate.</p>
+
+            <h2>The Data</h2>
+            <p>Our statistics are calculated using reliable annual benchmarks from global organizations including the
+                WHO, UN, and various scientific institutes. We divide these annual figures into second-by-second
+                increments to project a live estimate of global activity.</p>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-bottom">
+            <p>&copy; 2026 everysecond. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const toggle = document.getElementById('theme-toggle');
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        }
+
+        toggle.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        });
+    </script>
+</body>
+
+</html>

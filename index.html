@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>everysecond — Watch the World Change in Real Time</title>
+    <meta name="description"
+        content="Live counters showing what is happening on Earth right now. Births, deaths, nature, technology — all updating every second.">
+    <meta name="keywords" content="everysecond, earth statistics, live world counter, real time world data">
+
+    <!-- Open Graph tags  -->
+    <meta property="og:title" content="everysecond — Watch the World Change in Real Time">
+    <meta property="og:description"
+        content="Live counters showing what is happening on Earth right now. Births, deaths, nature, technology — all updating every second.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://everysecond.live">
+    <meta property="og:image" content="https://everysecond.live/og-image.jpg">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="everysecond — Watch the World Change in Real Time">
+    <meta name="twitter:description"
+        content="Live counters showing what is happening on Earth right now. Births, deaths, nature, technology — all updating every second.">
+
+    <!-- Favicon -->
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌍</text></svg>">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;700&family=Playfair+Display:wght@700&family=Syne:wght@700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- SECTION 1: TOP ANNOUNCEMENT BAR -->
+    <div class="announcement-bar" id="announcement-bar">
+        <span>🌍 All statistics are based on real published global data — updated every second</span>
+        <button class="close-btn" id="announcement-close" aria-label="Close Announcement">&times;</button>
+    </div>
+
+    <!-- PROGRESS BAR -->
+    <div class="progress-container">
+        <div class="progress-bar" id="day-progress"></div>
+        <span id="progress-label">Today is 0% complete</span>
+    </div>
+
+    <!-- SECTION 2: NAVIGATION BAR -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="logo.png" alt="EverySecond Logo" class="logo-img">
+                <span class="logo-text">everysecond</span>
+            </div>
+
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <div class="nav-links" id="nav-links">
+                <a href="#people" class="nav-link">People</a>
+                <a href="#nature" class="nav-link">Nature</a>
+                <a href="#technology" class="nav-link">Technology</a>
+                <a href="#money" class="nav-link">Money</a>
+                <a href="#food" class="nav-link">Food</a>
+                <a href="#health" class="nav-link">Health</a>
+            </div>
+
+            <div class="nav-actions">
+                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle Dark Mode">
+                    <span class="icon-moon">🌙</span>
+                    <span class="icon-sun">☀️</span>
+                </button>
+                <button class="share-btn"
+                    onclick="document.getElementById('share').scrollIntoView({behavior: 'smooth'})">
+                    Share
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- SECTION 3: HERO SECTION -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="eyebrow">
+                <span class="pulse-dot"></span> EVERY SECOND MATTERS
+            </div>
+            <h1 class="hero-title">Watch the World<br>Change <span>Every Second</span></h1>
+            <p class="hero-subtitle">Experience the pulse of humanity, nature, and technology <br> unfolding in
+                real-time, tick by tick.</p>
+
+            <div class="hero-actions">
+                <a href="map.html" class="primary-btn">Explore Live World 🌍</a>
+                <a href="#technology" class="secondary-btn">Tech Trends ⚡</a>
+            </div>
+
+            <div class="hero-stats">
+                <div class="hero-stat-card">
+                    <div class="hero-stat-number" id="hero-births">0</div>
+                    <div class="hero-stat-label">New Lives Today</div>
+                </div>
+                <div class="hero-stat-card">
+                    <div class="hero-stat-number" id="hero-co2">0</div>
+                    <div class="hero-stat-label">CO2 Released (tons)</div>
+                </div>
+                <div class="hero-stat-card">
+                    <div class="hero-stat-number" id="hero-searches">0</div>
+                    <div class="hero-stat-label">Google Searches</div>
+                </div>
+            </div>
+
+            <div class="scroll-indicator">
+                <a href="#people" aria-label="Scroll down">↓</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- AD 1: After hero section -->
+    <div class="ad-container">
+        <div class="ad-slot ad-leaderboard">
+            <span class="ad-label">Advertisement</span>
+            <div class="ad-content">728 &times; 90</div>
+        </div>
+    </div>
+
+    <!-- SECTION 4: PEOPLE & POPULATION -->
+    <section class="category-section" id="people">
+        <div class="section-container">
+            <div class="section-header">
+                <div class="section-icon">👥</div>
+                <h2 class="section-title">People</h2>
+                <p class="section-subtitle">Humanity in motion</p>
+            </div>
+
+            <div class="grid-container">
+                <div class="stat-card counter-card accent-green">
+                    <div class="card-icon">👶</div>
+                    <div class="card-title">Babies Born Today <span class="live-dot"></span></div>
+                    <div class="card-value tooltip" id="births-today">
+                        0
+                    </div>
+                    <div class="card-sublabel">born since midnight</div>
+                </div>
+
+                <div class="stat-card counter-card accent-blue-muted">
+                    <div class="card-icon">🕊️</div>
+                    <div class="card-title">People Died Today <span class="live-dot"></span></div>
+                    <div class="card-value" id="deaths-today">0</div>
+                    <div class="card-sublabel">passed away since midnight</div>
+                </div>
+
+                <div class="stat-card counter-card accent-red">
+                    <div class="card-icon">🌍</div>
+                    <div class="card-title">Current World Population</div>
+                    <div class="card-value" id="world-population">8,119,000,000</div>
+                    <div class="card-sublabel">people alive right now</div>
+                </div>
+
+                <div class="stat-card counter-card">
+                    <div class="card-icon">💍</div>
+                    <div class="card-title">Marriages Today</div>
+                    <div class="card-value" id="marriages-today">0</div>
+                    <div class="card-sublabel">couples married today</div>
+                </div>
+
+                <div class="stat-card counter-card">
+                    <div class="card-icon">💔</div>
+                    <div class="card-title">Divorces Today</div>
+                    <div class="card-value" id="divorces-today">0</div>
+                    <div class="card-sublabel">separations today</div>
+                </div>
+
+                <div class="stat-card counter-card">
+                    <div class="card-icon">💻</div>
+                    <div class="card-title">New Users Online Today <span class="live-dot"></span></div>
+                    <div class="card-value" id="internet-users">0</div>
+                    <div class="card-sublabel">connected since midnight</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 5: NATURE & ENVIRONMENT -->
+    <section class="category-section nature-bg" id="nature">
+        <div class="section-container">
+            <div class="section-header">
+                <div class="section-icon">🌿</div>
+                <h2 class="section-title">Nature</h2>
+                <p class="section-subtitle">Our planet, right now</p>
+            </div>
+
+            <div class="layout-with-sidebar">
+                <div class="main-grid grid-container-2">
+                    <div class="stat-card counter-card accent-red">
+                        <div class="card-icon">🌳</div>
+                        <div class="card-title">Trees Cut Down Today</div>
+                        <div class="card-value tooltip" id="trees-cut">
+                            0
+                        </div>
+                    </div>
+
+                    <div class="stat-card counter-card accent-green">
+                        <div class="card-icon">🌱</div>
+                        <div class="card-title">Trees Planted Today</div>
+                        <div class="card-value" id="trees-planted">0</div>
+                    </div>
+
+                    <div class="stat-card counter-card accent-orange">
+                        <div class="card-icon">💨</div>
+                        <div class="card-title">CO2 Added to Atmosphere</div>
+                        <div class="card-value" id="co2-today">0</div>
+                        <div class="card-sublabel">tons today</div>
+                    </div>
+
+                    <div class="stat-card counter-card accent-red-muted">
+                        <div class="card-icon">🦋</div>
+                        <div class="card-title">Species Extinct This Year</div>
+                        <div class="card-value" id="species-extinct">0</div>
+                    </div>
+
+                    <div class="stat-card counter-card accent-blue">
+                        <div class="card-icon">🧴</div>
+                        <div class="card-title">Plastic Bottles Used Today</div>
+                        <div class="card-value" id="plastic-bottles">0</div>
+                    </div>
+
+                    <div class="stat-card counter-card accent-blue">
+                        <div class="card-icon">💧</div>
+                        <div class="card-title">Water Used Today</div>
+                        <div class="card-value" id="water-used">0</div>
+                        <div class="card-sublabel">liters today</div>
+                    </div>
+                </div>
+
+                <!-- AD 2: Sidebar style -->
+                <div class="sidebar-ad">
+                    <div class="ad-slot ad-rectangle">
+                        <span class="ad-label">Advertisement</span>
+                        <div class="ad-content">300 &times; 250</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 6: TECHNOLOGY -->
+    <section class="category-section" id="technology">
+        <div class="section-container">
+            <div class="section-header">
+                <div class="section-icon">⚡</div>
+                <h2 class="section-title">Technology</h2>
+            </div>
+
+            <div class="grid-container">
+                <div class="stat-card counter-card accent-deep-blue">
+                    <div class="card-icon">🔍</div>
+                    <div class="card-title">Google Searches Today</div>
+                    <div class="card-value tooltip" id="google-searches">
+                        0
+                    </div>
+                </div>
+
+                <div class="stat-card counter-card">
+                    <div class="card-icon">📧</div>
+                    <div class="card-title">Emails Sent Today</div>
+                    <div class="card-value" id="emails-sent">0</div>
+                </div>
+
+                <div class="stat-card counter-card">
+                    <div class="card-icon">💬</div>
+                    <div class="card-title">WhatsApp Messages Today</div>
+                    <div class="card-value" id="whatsapp-msgs">0</div>
+                </div>
+
+                <div class="stat-card counter-card">
+                    <div class="card-icon">▶️</div>
+                    <div class="card-title">YouTube Videos Watched Today</div>
+                    <div class="card-value" id="youtube-views">0</div>
+                </div>
+
+                <div class="stat-card counter-card">
+                    <div class="card-icon">📱</div>
+                    <div class="card-title">iPhones Sold Today</div>
+                    <div class="card-value" id="iphones-sold">0</div>
+                </div>
+
+                <div class="stat-card counter-card">
+                    <div class="card-icon">🌐</div>
+                    <div class="card-title">Websites Created Today</div>
+                    <div class="card-value" id="websites-created">0</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 7: MONEY & ECONOMY -->
+    <section class="category-section money-bg" id="money">
+        <div class="section-container">
+            <div class="section-header">
+                <div class="section-icon">💰</div>
+                <h2 class="section-title">Money</h2>
+            </div>
+
+            <div class="grid-container">
+                <div class="stat-card counter-card accent-gold">
+                    <div class="card-icon">🍔</div>
+                    <div class="card-title">Fast Food Spent Today ($)</div>
+                    <div class="card-value" id="fastfood-spend">0</div>
+                </div>
+
+                <div class="stat-card counter-card">
+                    <div class="card-icon">🏥</div>
+                    <div class="card-title">Healthcare Spent Today ($)</div>
+                    <div class="card-value" id="healthcare-spend">0</div>
+                </div>
+
+                <div class="stat-card counter-card">
+                    <div class="card-icon">🛒</div>
+                    <div class="card-title">Online Shopping Today ($)</div>
+                    <div class="card-value" id="ecommerce-spend">0</div>
+                </div>
+
+                <div class="stat-card counter-card accent-red">
+                    <div class="card-icon">🔓</div>
+                    <div class="card-title">Cybercrime Losses Today ($)</div>
+                    <div class="card-value" id="cybercrime-loss">0</div>
+                </div>
+
+                <div class="stat-card counter-card">
+                    <div class="card-icon">🎟️</div>
+                    <div class="card-title">Lottery Tickets Sold Today</div>
+                    <div class="card-value" id="lottery-tickets">
+                        0</div>
+                </div>
+
+                <div class="stat-card counter-card">
+                    <div class="card-icon">₿</div>
+                    <div class="card-title">Bitcoin Transactions Today <span class="live-dot"></span></div>
+                    <div class="card-value" id="bitcoin-tx">0</div>
+                    <div class="card-sublabel">transactions since midnight</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 8: FOOD -->
+    <section class="category-section" id="food">
+        <div class="section-container">
+            <div class="section-header">
+                <div class="section-icon">🍽️</div>
+                <h2 class="section-title">Food</h2>
+            </div>
+
+            <div class="grid-container">
+                <div class="stat-card counter-card accent-orange">
+                    <div class="card-icon">🍕</div>
+                    <div class="card-title">Pizzas Eaten Today</div>
+                    <div class="card-value" id="pizzas-eaten">0
+                    </div>
+                </div>
+
+                <div class="stat-card counter-card">
+                    <div class="card-icon">🍔</div>
+                    <div class="card-title">Burgers Eaten Today</div>
+                    <div class="card-value" id="burgers-eaten">0
+                    </div>
+                </div>
+
+                <div class="stat-card counter-card">
+                    <div class="card-icon">☕</div>
+                    <div class="card-title">Coffee Cups Consumed Today</div>
+                    <div class="card-value" id="coffee-cups">
+                        0</div>
+                </div>
+
+                <div class="stat-card counter-card accent-red">
+                    <div class="card-icon">🗑️</div>
+                    <div class="card-title">Food Wasted Today (tons)</div>
+                    <div class="card-value" id="food-wasted">0</div>
+                </div>
+
+                <div class="stat-card counter-card">
+                    <div class="card-icon">🥚</div>
+                    <div class="card-title">Eggs Eaten Today</div>
+                    <div class="card-value" id="eggs-eaten">0</div>
+                </div>
+
+                <div class="stat-card counter-card">
+                    <div class="card-icon">🍗</div>
+                    <div class="card-title">Chickens Slaughtered Today</div>
+                    <div class="card-value" id="chickens-killed">0
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 9: HEALTH -->
+    <section class="category-section health-bg" id="health">
+        <div class="section-container">
+            <div class="section-header">
+                <div class="section-icon">❤️</div>
+                <h2 class="section-title">Health</h2>
+            </div>
+
+            <div class="grid-container">
+                <div class="stat-card counter-card">
+                    <div class="card-icon">🚬</div>
+                    <div class="card-title">Cigarettes Smoked Today</div>
+                    <div class="card-value" id="cigarettes-smoked">0</div>
+                </div>
+
+                <div class="stat-card counter-card accent-red">
+                    <div class="card-icon">💔</div>
+                    <div class="card-title">Heart Attacks Today</div>
+                    <div class="card-value" id="heart-attacks">0
+                    </div>
+                </div>
+
+                <div class="stat-card counter-card">
+                    <div class="card-icon">🎗️</div>
+                    <div class="card-title">Cancer Diagnoses Today</div>
+                    <div class="card-value" id="cancer-dx">0
+                    </div>
+                </div>
+
+                <div class="stat-card counter-card">
+                    <div class="card-icon">🏥</div>
+                    <div class="card-title">Surgeries Performed Today</div>
+                    <div class="card-value" id="surgeries">0
+                    </div>
+                </div>
+
+                <div class="stat-card counter-card">
+                    <div class="card-icon">👶</div>
+                    <div class="card-title">Premature Babies Born Today</div>
+                    <div class="card-value" id="premature-births">0
+                    </div>
+                </div>
+
+                <div class="stat-card counter-card accent-green">
+                    <div class="card-icon">🚫</div>
+                    <div class="card-title">People Quit Smoking Today</div>
+                    <div class="card-value" id="quit-smoking">0
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 10: SHARE SECTION -->
+    <section class="share-section" id="share">
+        <div class="share-container">
+            <h2>Mind blown? Share with the world 🌍</h2>
+            <p>Let your friends see Earth in real time</p>
+            <div class="share-buttons">
+                <button class="share-link-btn" onclick="shareTwitter()">Share on Twitter</button>
+                <button class="share-link-btn" onclick="shareWhatsApp()">Share on WhatsApp</button>
+                <button class="share-link-btn" onclick="shareFacebook()">Share on Facebook</button>
+                <button class="share-link-btn outline" id="copy-link-btn" onclick="copyLink()">Copy Link</button>
+            </div>
+            <div id="copy-toast" class="toast">Link Copied!</div>
+        </div>
+    </section>
+
+    <!-- AD 3: Before footer -->
+    <div class="ad-container ad-bottom">
+        <div class="ad-slot ad-leaderboard-bottom">
+            <span class="ad-label">Advertisement</span>
+            <div class="ad-content">728 &times; 90</div>
+        </div>
+    </div>
+
+    <!-- SECTION 12: FOOTER -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <img src="logo.png" alt="EverySecond Logo" class="logo-img">
+                        <span class="logo-text">everysecond</span>
+                    </div>
+                    <p class="footer-desc">All data based on published annual global statistics divided by time elapsed
+                    </p>
+                </div>
+
+                <div class="footer-col">
+                    <h3>Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#data">Data Sources</a></li>
+                        <li><a href="#share">Share</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h3>Explore</h3>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h3>Social Media</h3>
+                    <ul>
+                        <li><a href="https://instagram.com" target="_blank">Instagram</a></li>
+                        <li><a href="https://x.com" target="_blank">X</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 everysecond — Data for awareness, not alarm</p>
+                <p class="disclaimer">Numbers are estimates based on published annual global statistics</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
