@@ -444,41 +444,76 @@ function initNavigation() {
 // SHARE FUNCTIONALITY
 // ============================================================
 
+// ===================================
+// MODAL & AD LOGIC
+// ===================================
+
+let pendingAction = null;
+
+function showShareAd(callback) {
+    const modal = document.getElementById('share-ad-modal');
+    if (!modal) {
+        callback();
+        return;
+    }
+    pendingAction = callback;
+    modal.style.display = 'flex';
+}
+
+function closeShareModal() {
+    const modal = document.getElementById('share-ad-modal');
+    if (modal) {
+        modal.style.display = 'none';
+        if (pendingAction) {
+            pendingAction();
+            pendingAction = null;
+        }
+    }
+}
+
 function shareTwitter() {
-    const text = encodeURIComponent(
-        'This website shows what is happening on Earth RIGHT NOW in real time 🌍\n' +
-        'Births, deaths, trees cut, money spent — all live!\n' +
-        'everysecond.live #everysecond #LiveData #EarthLive'
-    );
-    window.open(`https://twitter.com/intent/tweet?text=${text}`, '_blank');
+    showShareAd(() => {
+        const text = encodeURIComponent(
+            'This website shows what is happening on Earth RIGHT NOW in real time 🌍\n' +
+            'Births, deaths, trees cut, money spent — all live!\n' +
+            'everysecond.live #everysecond #LiveData #EarthLive'
+        );
+        window.open(`https://twitter.com/intent/tweet?text=${text}`, '_blank');
+    });
 }
 
 function shareWhatsApp() {
-    const text = encodeURIComponent(
-        'Watch the world change in real time 🌍 everysecond.live'
-    );
-    window.open(`https://wa.me/?text=${text}`, '_blank');
+    showShareAd(() => {
+        const text = encodeURIComponent(
+            'Watch the world change in real time 🌍 everysecond.live'
+        );
+        window.open(`https://wa.me/?text=${text}`, '_blank');
+    });
 }
 
 function shareFacebook() {
-    const url = encodeURIComponent('https://everysecond.live');
-    window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank');
+    showShareAd(() => {
+        const url = encodeURIComponent('https://everysecond.live');
+        window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank');
+    });
 }
 
 function copyLink() {
-    navigator.clipboard.writeText(window.location.href).then(() => {
-        const btn = document.getElementById('copy-link-btn') || document.querySelector('.share-link-btn.outline');
-        if (btn) {
-            const original = btn.textContent;
-            btn.textContent = 'Copied! ✓';
-            btn.style.background = '#2D6A4F';
-            btn.style.color = '#fff';
-            setTimeout(() => {
-                btn.textContent = original;
-                btn.style.background = '';
-                btn.style.color = '';
-            }, 2000);
-        }
+    showShareAd(() => {
+        navigator.clipboard.writeText(window.location.href).then(() => {
+            const btn = document.getElementById('copy-link-btn') || document.querySelector('.share-link-btn.outline');
+            if (btn) {
+                const original = btn.textContent;
+                btn.textContent = 'Copied! ✓';
+                btn.style.background = '#2D6A4F';
+                btn.style.color = '#fff';
+                setTimeout(() => {
+                    btn.textContent = original;
+                    btn.style.background = '';
+                    btn.style.color = '';
+                }, 2000);
+            }
+        });
     });
 }
 
@@ -535,6 +570,7 @@ window.shareTwitter = shareTwitter;
 window.shareWhatsApp = shareWhatsApp;
 window.shareFacebook = shareFacebook;
 window.copyLink = copyLink;
+window.closeShareModal = closeShareModal;
 
 // ============================================================
 // THEME TOGGLE (DARK MODE)
@@ -624,5 +660,5 @@ document.addEventListener('DOMContentLoaded', () => {
     updateProgressBar();
 
     console.log('%c🌍 everysecond', 'font-size:20px;font-weight:bold;color:#E8533A');
-    console.log('%cAll counters running. Update ANNUAL_STATS each year.', 'color:#2D6A4F');
+    console.log('%cAll counters running.', 'color:#2D6A4F');
 });
